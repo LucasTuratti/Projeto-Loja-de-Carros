@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Luxury Cars - Showroom Premium</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="brand">
+                <img src="assets/logo.png" alt="Luxury Cars Logo" class="logo">
+                <div>
+                    <h1>Luxury Cars</h1>
+                    <div class="subtitle">Showroom Premium</div>
+                </div>
+            </div>
+            <nav>
+                <button class="btn" id="open-add">Adicionar Carro</button>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Nossa missão vai além de vender carros.<br> Criamos obras-primas únicas que desafiam convenções.</h2>
+                <p class="hero-subtitle">Descubra nossa curadoria exclusiva de veículos de luxo. Cada carro é uma expressão de excelência e sofisticação.</p>
+            </div>
+            <div class="hero-visual">
+                <img src="assets/carro1.jpg" alt="Luxury Car" class="hero-image">
+            </div>
+        </section>
+
+        <div id="msg" aria-live="polite"></div>
+
+        <!-- Featured Cars Section -->
+        <section id="featured-section" class="section">
+            <div class="section-header">
+                <h3>Destaques</h3>
+                <p class="section-subtitle">Nossas principais obras-primas</p>
+            </div>
+            <div class="featured-carousel">
+                <button class="carousel-btn" id="feat-prev" aria-label="Anterior">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                </button>
+                <div id="featured-grid" role="region" aria-label="Carrossel de destaques">
+                    <!-- Featured cars will be rendered here -->
+                </div>
+                <button class="carousel-btn" id="feat-next" aria-label="Próximo">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Filters and Search -->
+        <section class="card filters-section">
+            <div class="filters-row">
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="Buscar por marca, modelo..." class="search-input">
+                </div>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">Todos</button>
+                    <button class="filter-btn" data-filter="luxury">Luxury</button>
+                    <button class="filter-btn" data-filter="sports">Sports</button>
+                    <button class="filter-btn" data-filter="suv">SUV</button>
+                    <button class="filter-btn" data-filter="limited">Limited</button>
+                </div>
+                <button id="refresh" class="btn ghost">Atualizar</button>
+            </div>
+        </section>
+
+        <!-- All Cars Grid -->
+        <section class="section">
+            <div class="section-header">
+                <h3>Nossa Coleção</h3>
+                <p class="section-subtitle" id="cars-count"></p>
+            </div>
+            <div id="cars-grid" class="cars-grid">
+                <!-- cards serão renderizados aqui -->
+            </div>
+        </section>
+    </div>
+
+    <!-- Car Form Dialog -->
+    <dialog id="form-dialog">
+        <form method="dialog" id="car-dialog-form">
+            <div class="modal-body">
+                <div class="modal-header">
+                    <h3 id="form-title">Adicionar carro</h3>
+                    <button type="button" id="close-dialog" class="close-btn">&times;</button>
+                </div>
+                <input type="hidden" name="id">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Marca *</label>
+                        <input type="text" name="make" placeholder="Ex: Lamborghini" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Modelo *</label>
+                        <input type="text" name="model" placeholder="Ex: Urus" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Ano *</label>
+                        <input type="number" name="year" placeholder="2024" min="1900" max="2100" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Preço (€)</label>
+                        <input type="number" name="price" step="0.01" placeholder="300000.00">
+                    </div>
+                    <div class="form-group">
+                        <label>Categoria</label>
+                        <select name="category">
+                            <option value="luxury">Luxury</option>
+                            <option value="sports">Sports</option>
+                            <option value="suv">SUV</option>
+                            <option value="limited">Limited Edition</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Destaque</label>
+                        <select name="featured">
+                            <option value="false">Não</option>
+                            <option value="true">Sim</option>
+                        </select>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Descrição</label>
+                        <textarea name="description" rows="3" placeholder="Descrição detalhada do veículo..."></textarea>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Logo/Brand URL</label>
+                        <input type="text" name="brand_logo" placeholder="https://exemplo.com/logo.png">
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn">Salvar</button>
+                    <button type="button" id="cancel" class="btn ghost">Cancelar</button>
+                </div>
+            </div>
+        </form>
+    </dialog>
+
+    <script src="js/app.js"></script>
+    <!-- Rodapé simples -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="container footer-inner">
+            <div class="footer-left">© <span id="footer-year"></span> Luxury Cars</div>
+            <div class="footer-right">
+                <a href="mailto:contato@luxurycars.com">contato@luxurycars.com</a>
+                <span class="sep">·</span>
+                <a href="politica-privacidade.html">Política de Privacidade</a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Atualiza o ano do rodapé automaticamente
+        (function(){
+            var el = document.getElementById('footer-year');
+            if (el) el.textContent = new Date().getFullYear();
+        })();
+    </script>
+</body>
+</html>
